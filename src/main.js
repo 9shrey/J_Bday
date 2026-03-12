@@ -2,7 +2,7 @@ import { dialogueData, scaleFactor } from "./constants";
 import { k } from "./kaboomCtx";
 import { displayDialogue, setCamScale } from "./utils";
 
-k.loadSprite("spritesheet", "./spritesheet.png", {
+k.loadSprite("spritesheet", `${import.meta.env.BASE_URL}spritesheet.png`, {
   sliceX: 39,
   sliceY: 31,
   anims: {
@@ -16,14 +16,12 @@ k.loadSprite("spritesheet", "./spritesheet.png", {
   },
 });
 
-k.loadSprite("map", "./map.png");
-// Update asset path for GitHub Pages
-k.loadSprite("map", "/J_Bday/map.png");
+k.loadSprite("map", `${import.meta.env.BASE_URL}map.png`);
 
 k.setBackground(k.Color.fromHex("#311047"));
 
 k.scene("main", async () => {
-  const mapData = await (await fetch("/J_Bday/map.json")).json();
+  const mapData = await (await fetch(`${import.meta.env.BASE_URL}map.json`)).json();
   const layers = mapData.layers;
 
   const map = k.add([k.sprite("map"), k.pos(0), k.scale(scaleFactor)]);
